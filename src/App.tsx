@@ -2,16 +2,19 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { ClerkProvider, SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react'
+import { SignedIn, SignedOut, UserButton, useUser, RedirectToSignIn } from '@clerk/clerk-react'
 
-const clerkPubKey = import.meta.env.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY;
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const { user } = useUser();
 
   return (
-    <ClerkProvider publishableKey={clerkPubKey}>
+    <>
       <SignedIn>
+        <UserButton />
+        {user ? <h1>Hello, {user.firstName}!</h1> : null}
         <div>
           <a href="https://vitejs.dev" target="_blank">
             <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -36,7 +39,7 @@ function App() {
       <SignedOut>
         <RedirectToSignIn />
       </SignedOut>
-    </ClerkProvider>
+    </>
   )
 }
 
