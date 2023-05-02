@@ -4,8 +4,6 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { SignedIn, SignedOut, UserButton, useUser, RedirectToSignIn } from '@clerk/clerk-react'
 
-
-
 function App() {
   const [count, setCount] = useState(0);
   const { user } = useUser();
